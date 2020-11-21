@@ -1,3 +1,4 @@
+import { green, red } from '@material-ui/core/colors';
 import React, { useState, useEffect } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 
@@ -28,12 +29,26 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
               label: 'People',
               backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
               data: [confirmed.value, recovered.value, deaths.value],
+              
             },
           ],
         }}
         options={{
           legend: { display: false },
-          title: { display: true, text: `Current state in ${country}` },
+          title: { display: true, text: `Current state in ${country}` , fontColor: "white" },
+          scales: {
+            yAxes: [{
+                ticks: {
+                   fontColor: "white"
+                }
+            }],
+            xAxes: [{
+              ticks: {
+                 fontColor: "white"
+              }
+          }]
+
+        }
         }}
       />
     ) : null
@@ -49,11 +64,12 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
             label: 'Infected',
             borderColor: '#3333ff',
             fill: true,
+            
           }, {
             data: dailyData.map((data) => data.deaths),
             label: 'Deaths',
             borderColor: 'red',
-            backgroundColor: 'rgba(255, 0, 0, 0.5)',
+            backgroundColor: 'rgba(200, 0, 0, 1)',
             fill: true,
           },
           ],
@@ -64,7 +80,7 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
 
   return (
     <div className={styles.container}>
-      {country ? barChart :lineChart}
+      {country ? barChart : lineChart}
     </div>
   );
 };
